@@ -27,7 +27,8 @@ Rails.application.routes.draw do
     :registrations => 'customers/registrations',
     :passwords => 'customers/passwords'
    }
-
+   
+   
     get 'about' => 'customer/homes#about'
     root 'customer/homes#top'
 
