@@ -1,4 +1,4 @@
-class Adimin::GenresController < ApplicationController
+class Admin::GenresController < ApplicationController
 
  def index
     @genres = Genre.all
@@ -6,27 +6,31 @@ class Adimin::GenresController < ApplicationController
  end
 
  def create
-     genre = Genre.new(genre_params)
-     genre.save
-     redirect_to admin_genres_pash
+    @genres = Genre.all
+    @genre = Genre.new(genre_params)
+    if @genre.save
+      redirect_to admin_genres_path
+      @genres = Genre.all
+    end
  end
 
  def edit
-  @genre = Genre.find(params[:id])
+     @genre = Genre.find(params[:id])
  end
 
  def update
-  genre = Genre.find(params[:id])
-  genre.update(list_params)
-  redirect_to admin_genres_pash
+    @genre = Genre.find(params[:id])
+    if @genre.update(genre_params)
+      redirect_to admin_genres_path
+    end
  end
 
  private
   # ストロングパラメータ
   def genre_params
-    params.require(:genre).permit(:title, :body)
+    params.require(:genre).permit(:name)
   end
-  
+
 # paramsはRailsで送られてきた値を受け取るためのメソッドです。
 # requireでデータのオブジェクト名(ここでは:list)を指定し、permitでキー（:title,:body）を指定しています。
 # これにより、list_paramsの中にフォームで入力されたデータが格納されます。
