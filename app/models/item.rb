@@ -1,8 +1,16 @@
 class Item < ApplicationRecord
-    belongs_to :genre
-	has_many :cart_item
-	has_many :order, through: :order_detail
-	has_many :order_detail
+   has_many :cart_items
+  has_many :order_details
+  belongs_to :genre
 
-	attachment :image
-end
+  attachment :image
+
+  validates :name, presence: true
+  validates :introduction, presence: true
+  validates :price, presence: true
+  validates :is_active, inclusion: [true, false]
+
+  def add_tax_price
+    (self.price*1.10).round
+  end
+end  
