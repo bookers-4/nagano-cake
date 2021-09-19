@@ -28,7 +28,9 @@ Rails.application.routes.draw do
     :passwords => 'customers/passwords'
    }
 
+
     scope module: :customer do
+
 
     get 'about' => 'customer/homes#about'
     root 'customer/homes#top'
