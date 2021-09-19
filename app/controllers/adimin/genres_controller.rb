@@ -12,11 +12,13 @@ class Adimin::GenresController < ApplicationController
  end
 
  def edit
-  @genre = Genre.all
+  @genre = Genre.find(params[:id])
  end
 
  def update
-  @genre = Genre.find()
+  genre = Genre.find(params[:id])
+  genre.update(list_params)
+  redirect_to admin_genres_pash
  end
 
  private
