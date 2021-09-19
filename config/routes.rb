@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     :passwords => 'customers/passwords'
    }
 
+    scope module: :customer do
+
     get 'about' => 'customer/homes#about'
     root 'customer/homes#top'
 
@@ -39,7 +41,6 @@ Rails.application.routes.draw do
         collection do
           delete '/' => 'cart_items#all_destroy'
         end
-      end
 
     resources :orders,only: [:new,:index,:show,:create] do
       collection do
@@ -51,6 +52,7 @@ Rails.application.routes.draw do
     resources :shipping_addresses,only: [:index,:create,:edit,:update,:destroy]
 
 
-
+  end
+  end
 
 end
