@@ -3,8 +3,11 @@ Rails.application.routes.draw do
   devise_for :admins, controllers: {
   sessions:      'admins/sessions',
   passwords:     'admins/passwords',
-}# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-   #管理者ルーティング
+}
+
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  
+  #管理者ルーティング
   namespace :admin do
     root to: "homes#top"
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
