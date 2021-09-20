@@ -1,0 +1,16 @@
+<h1>商品詳細</h1>
+        <%= attachment_image_tag @item, :image, fallback: "no_image.jpg", size: "200x150" %>
+        <p>商品名  <%= @item.name %></p>
+        <p>税込価格(税抜価格)  <%= @item.add_tax_price.to_s(:delimited) %>(<%= @item.price %>)円</p>
+        <p>ジャンル  <%= @item.genre.name %></p>
+        <p style="text-align">販売ステータス
+          <% if @item.is_active == true %>
+            <strong style="color: green;"><%= '販売中' %></strong>
+          <% else %>
+            <strong style="color: #CCCCCC"><%= '販売停止中' %></strong>
+          <% end %>
+        </p>
+        <%= link_to '編集する', edit_admin_item_path(@item), class:"btn btn-outline-success" %>
+        <%= link_to '一覧画面へ', admin_items_path , class:"btn btn-outline-success" %>
+  </div>
+</div>
