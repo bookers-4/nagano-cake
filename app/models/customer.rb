@@ -1,3 +1,4 @@
+
 class Customer < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -13,7 +14,7 @@ class Customer < ApplicationRecord
   validates :first_name, presence: true
   validates :furigana_last, presence: true
   validates :furigana_first, presence: true
-  validates :postcode, presence: true
+  validates :postal_code, presence: true
   validates :address, presence: true
   validates :telephone_number, presence: true
 

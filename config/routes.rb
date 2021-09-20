@@ -27,14 +27,11 @@ Rails.application.routes.draw do
     :registrations => 'customers/registrations',
     :passwords => 'customers/passwords'
    }
-
-
+    
     scope module: :customer do
-
-
-    get 'about' => 'customer/homes#about'
-    root 'customer/homes#top'
-
+    root to: 'homes#top'
+    get 'about' => 'homes#about'
+   
     resources :items,only: [:index,:show]
 
     resources :customers, only: [:index, :show, :edit, :update]
