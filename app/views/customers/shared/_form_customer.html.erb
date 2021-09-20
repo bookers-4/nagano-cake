@@ -1,8 +1,14 @@
 <%= form_with model: customer, local: true do |f| %>
- <h4>郵便番号(ハイフンなし)</h4>
-  <%= f.text_field :string, autofocus: true %>
- <h4>住所</h4>
-  <%= f.text_field :string, autofocus: true %>
- <h4>電話番号(ハイフンなし)</h4>
-  <%= f.text_field :string, autofocus: true %>
+  <div class="field form-group col-xs-9">
+   <%= f.label :"郵便番号(ハイフンなし)", class: "col-sm-4 control-label" %>
+   <%= f.text_field :postal_code, class: "col-sm-4 form-control-static postal_code" %>
+  </div>
+  <div class="field form-group col-xs-9">
+   <%= f.label :"住所", class: "col-sm-4 control-label" %>
+   <%= f.text_field :address, class: "col-sm-4 form-control-static address" %>
+  </div>
+  <div class="field form-group col-xs-9">
+   <%= f.label :"電話番号(ハイフンなし)", class: "col-sm-4 control-label" %>
+   <%= f.text_field :phone_number, class: "col-sm-4 form-control-static phone_number" %>
+  </div>
 <% end %>
