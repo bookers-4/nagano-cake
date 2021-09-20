@@ -1,4 +1,4 @@
-class Customers::HomesController < ApplicationController
+class Customer::HomesController < ApplicationController
 
   def about
   end

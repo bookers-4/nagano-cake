@@ -29,20 +29,23 @@ Rails.application.routes.draw do
    }
 
 
+
+
+
+    get 'about' => 'homes#about'
+    root 'homes#top'
+
     scope module: :customer do
 
-
-    get 'about' => 'customer/homes#about'
-    root 'customer/homes#top'
+    resources :addresses,only: [:index,:create,:edit,:update,:destroy]
 
     resources :items,only: [:index,:show]
 
-    resources :customers, only: [:index, :show, :edit, :update]
-
-    resources :cart_items,only: [:index,:update,:create,:destroy] do
+     resources :cart_items,only: [:index,:update,:create,:destroy] do
         collection do
           delete '/' => 'cart_items#all_destroy'
-        end
+      end
+    end
 
     resources :orders,only: [:new,:index,:show,:create] do
       collection do
@@ -51,10 +54,23 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :shipping_addresses,only: [:index,:create,:edit,:update,:destroy]
+
+
+
+    resources :customers, only: [:index, :show, :edit, :update]
+
+    resources :cart_items,only: [:index,:update,:create,:destroy] do
+        collection do
+          delete '/' => 'cart_items#all_destroy'
+        end
+
+
+
+
+
 
 
   end
-  end
 
+end
 end
