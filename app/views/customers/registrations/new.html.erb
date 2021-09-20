@@ -23,8 +23,8 @@
         <%= f.text_field :kana_first_name, autofocus: true, class: "col-sm-3 form-control-static name" %>
       </div>
 
-        <%= render "admin/customers/form_mail", f: f %>
-        <%= render "admin/customers/form_customer", f: f %>
+        <%= render "customers/shared/form_mail", f: f %>
+        <%= render "customers/shared/form_customer", customer: @customer %>
 
       <div class="field form-group col-xs-9">
         <%= f.label :"パスワード(6文字以上)", class: "col-sm-4 control-label" %>
