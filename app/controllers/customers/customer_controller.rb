@@ -6,6 +6,7 @@ class CustomerController < ApplicationController
       @customer = Customer.find(params[:id])
     end
     
+    
     def index
     end
     
