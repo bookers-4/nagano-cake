@@ -13,6 +13,9 @@ def full_name
     self.last_name + " " + self.first_name
 end
 
+def full_name_kana
+    self.furigana_last + " " + self.furigana_first
+end
   validates :last_name, presence: true
   validates :first_name, presence: true
   validates :furigana_last, presence: true
