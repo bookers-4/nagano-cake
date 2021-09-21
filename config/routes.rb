@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     :registrations => 'customers/registrations',
     :passwords => 'customers/passwords'
    }
+
     
     scope module: :customer do
     root to: 'homes#top'
@@ -34,12 +35,18 @@ Rails.application.routes.draw do
    
     resources :items,only: [:index,:show]
 
-    resources :customers, only: [:index, :show, :edit, :update]
 
-    resources :cart_items,only: [:index,:update,:create,:destroy] do
+    
+
+    resources :addresses,only: [:index,:create,:edit,:update,:destroy]
+
+    resources :items,only: [:index,:show]
+
+     resources :cart_items,only: [:index,:update,:create,:destroy] do
         collection do
           delete '/' => 'cart_items#all_destroy'
-        end
+      end
+    end
 
     resources :orders,only: [:new,:index,:show,:create] do
       collection do
@@ -48,10 +55,23 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :shipping_addresses,only: [:index,:create,:edit,:update,:destroy]
+
+
+
+    resources :customers, only: [:index, :show, :edit, :update]
+
+    resources :cart_items,only: [:index,:update,:create,:destroy] do
+        collection do
+          delete '/' => 'cart_items#all_destroy'
+        end
+
+
+
+
+
 
 
   end
-  end
 
+end
 end
