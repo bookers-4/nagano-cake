@@ -1,6 +1,6 @@
 class Customer::ItemsController < ApplicationController
 
-  before_action :authenticate_customer!, only: [:show]
+  #before_action :authenticate_customer!, only: [:show]
 
   def top
     @items = Item.all.(created_at: :asc)
@@ -9,7 +9,7 @@ class Customer::ItemsController < ApplicationController
 	end
 
 	def index
-    @genres = Genre.all
+   @item = Item.all
    @items = Item.where(is_active: true).page(params[:page]).reverse_order
 	end
 
@@ -24,7 +24,7 @@ class Customer::ItemsController < ApplicationController
 
 	private
 	def item_params
-		parmas.require(:product).permit(:image ,:name, :explanation, :tax_out_price, :is_sale)
+		parmas.require(:product).permit(:image ,:name, :introduction, :tax_out_price, :is_active)
 	end
 
 end

@@ -10,27 +10,25 @@
           <h2><%= @item.name %></h2>
         </div>
         <div class="field">
-          <%= @item.explanation %>
+          <%= @item.introduction %>
         </div>
         <div class="field item-price">
-          <h3>¥ <%= tax_price(@item.tax_out_price).to_s(:delimited) %>
+        <p>税込価格(税抜価格)  <%= @item.add_tax_price.to_s(:delimited) %>(<%= @item.price %>)円</p>
+
               <span class="tax">(税込)</span>
           </h3>
         </div>
       </div>
 
       <div class="field">
-        <% if @item.is_sale == true %>
-          <% if @item.genre.is_valid == true %>
-            <%= form_for(@cart_item , url: customers_cart_items_path, method: :post) do |f| %>
+        <% if @item.is_active == true %>
+            <%= form_for(@cart_item , url: cart_items_path, method: :post) do |f| %>
               <%= f.hidden_field :item_id, value: @item.id %>
-              <%= f.select :quantity, options_for_select((1..10).to_a), include_blank: "個数選択" %>
+              <%= f.select :amount, options_for_select((1..10).to_a), include_blank: "個数選択" %>
               <%= f.submit "カートに入れる", class: "glyphicon glyphicon-shopping-cart btn btn-primary" %>
             <% end %>
-          <% else %>
-            <h3>売り切れ中</h3>
-          <% end %>
-        <% elsif @item.is_sale == false %>
+
+        <% elsif @item.is_active == false %>
           <h3>売り切れ中</h3>
         <% end %>
       </div>
