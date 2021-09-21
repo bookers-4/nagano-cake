@@ -28,14 +28,15 @@ Rails.application.routes.draw do
     :passwords => 'customers/passwords'
    }
 
-
-
-
-
-    get 'about' => 'homes#about'
-    root 'homes#top'
-
+    
     scope module: :customer do
+    root to: 'homes#top'
+    get 'about' => 'homes#about'
+   
+    resources :items,only: [:index,:show]
+
+
+    
 
     resources :addresses,only: [:index,:create,:edit,:update,:destroy]
 
