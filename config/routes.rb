@@ -36,6 +36,10 @@ Rails.application.routes.draw do
     resources :items,only: [:index,:show]
 
 
+    get "customers/unsubscribe" => "customers#unsubscribe"
+    patch "customers/withdraw" => "customers#withdraw"  
+    #仮追加
+    
 
 
     resources :addresses,only: [:index,:create,:edit,:update,:destroy]
