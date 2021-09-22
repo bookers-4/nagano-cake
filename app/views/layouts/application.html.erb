@@ -9,7 +9,9 @@
   </head>
 
   <body>
-    
+    <% if customer_signed_in? %>
+    <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"btn btn-md btn-outline-secondary mr-3" %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

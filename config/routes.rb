@@ -28,17 +28,19 @@ Rails.application.routes.draw do
     :passwords => 'customers/passwords'
    }
 
-    
+
     scope module: :customer do
     root to: 'homes#top'
     get 'about' => 'homes#about'
-   
+
     resources :items,only: [:index,:show]
+
 
     get "customers/unsubscribe" => "customers#unsubscribe"
     patch "customers/withdraw" => "customers#withdraw"  
     #仮追加
     
+
 
     resources :addresses,only: [:index,:create,:edit,:update,:destroy]
 
@@ -62,18 +64,9 @@ Rails.application.routes.draw do
 
     resources :customers, only: [:show, :edit, :update]
 
-    resources :cart_items,only: [:index,:update,:create,:destroy] do
-        collection do
-          delete '/' => 'cart_items#all_destroy'
-        end
-
-
-
-
-
 
 
   end
 
 end
-end
+
