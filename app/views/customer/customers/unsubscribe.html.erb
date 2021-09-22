@@ -17,7 +17,7 @@
     <%= link_to "退会しない", customer_path(current_customer), class: 'btn btn-primary' %>
    </div>
    <div class= "offset-2 col-2">
-    <%= link_to "退会する", withdrow_customer_path(@customer),method: :patch, class: 'btn btn-danger' %>
+    <%= link_to "退会する", customers_withdraw_path, method: :patch, class: 'btn btn-danger' %>
    </div>
   </div>
 </div>
