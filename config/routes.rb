@@ -58,7 +58,7 @@ Rails.application.routes.draw do
 
 
 
-    resources :customers, only: [:index, :show, :edit, :update]
+    resources :customers, only: [:show, :edit, :update]
 
     resources :cart_items,only: [:index,:update,:create,:destroy] do
         collection do

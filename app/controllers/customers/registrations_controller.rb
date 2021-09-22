@@ -63,7 +63,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
   protected
   
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name,:first_name,:furigana_last,:furigana_first,
+     devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name,:first_name,:furigana_last,:furigana_first,
     :postal_code,:address,:telephone_number,:attribute])
   end
 
