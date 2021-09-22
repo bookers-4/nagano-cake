@@ -1,0 +1,19 @@
+<td class="text-left">
+  <%= attachment_image_tag( cart_item.item, :image, size: "55x43", fallback: "no_image.jpg") %>
+  <%= cart_item.item.name %>
+</td>
+<td class="text-right">
+  ¥<%= cart_item.item.add_tax_price.to_s(:delimited) %>
+</td>
+<td>
+  <%= form_with model:cart_item, url: cart_item_path(cart_item), method: :patch , local: true do |f| %>
+    <%= f.number_field :amount, class: "amount", size: 10, min: 1, id: "amount_cart" %>
+    <%= f.submit "変更", class: "btn btn-info" %>
+  <% end %>
+</td>
+<td class="text-right" id='add_tax_price-<%= cart_item.id %>'>
+  ¥<%= cart_item.item.total_price(cart_item.amount).to_s(:delimited) %>
+</td>
+<td>
+  <%= link_to " 削除する", cart_item_path(cart_item), method: :delete, data: {confirm: "#{cart_item.item.name}を削除してよろしいですか？"}, class: "glyphicon glyphicon-trash btn btn-danger" %>
+</td>
