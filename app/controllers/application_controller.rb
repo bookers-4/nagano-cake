@@ -16,5 +16,9 @@ class ApplicationController < ActionController::Base
       new_admin_session_path
     end
   end
+  
+  def after_sign_up_path_for(resource)
+     items_path
+  end
 
 end

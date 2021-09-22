@@ -9,6 +9,15 @@
   </head>
 
   <body>
+    <% if admin_signed_in? %>
+    <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"btn btn-md btn-outline-secondary mr-3" %>
+    <% end %>
+    
+    <% if current_customer.present? %>
+    <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"btn btn-md btn-outline-secondary mr-3" %>
+    <% end %>
+    
+    
     
     <%= yield %>
   </body>
