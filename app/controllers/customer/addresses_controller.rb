@@ -7,7 +7,7 @@ class Customer::AddressesController < ApplicationController
   def index
   	@addresses = current_customer.address
   	@address = Address.new
-	end
+end
 
 	def create
 	  @address = Address.new(address_params)

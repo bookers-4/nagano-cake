@@ -6,7 +6,7 @@ class Customer::ItemsController < ApplicationController
     @items = Item.all.(created_at: :asc)
     #=> :asc,古い順 :desc,新しい順
     @genres = Genre.all
-	end
+  end
 
 	def index
    @item = Item.all
