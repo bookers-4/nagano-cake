@@ -48,18 +48,17 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :orders,only: [:new,:index,:show,:create] do
-      collection do
-        post 'log'
-        get 'thanx'
-      end
-    end
+    get 'orders/about' => 'orders#about'
+    get 'orders/complete' => 'orders#complete'
 
 
+    resources :orders,only: [:index,:show,:create]
 
+    post 'orders/new' => 'orders#new'
+    post 'orders/log' => 'orders#log'
+    get 'orders/thanks' => 'orders#thanks'
 
     resources :customers, only: [:show, :edit, :update]
-
 
 
   end
