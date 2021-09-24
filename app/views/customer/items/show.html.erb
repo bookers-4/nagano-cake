@@ -1,25 +1,16 @@
+<div class="container mt-5 pt-2">
+
 <% provide(:title, "#{@item.name}") %>
 <div class="row">
-    <div class="col-xs-4 col-xs-offset-2 item-show">
-      <%= attachment_image_tag(@item, :image, size: "340x220", fallback: "no_image.jpg" ) %>
+    <div class="offset-1 col-4 d-flex justify-content-center">
+      <%= attachment_image_tag @item, :image, format: "jpeg", fallback: "no_image.jpg", size: "400x300" %>
     </div>
 
-    <div class="col-xs-6 item-show">
-      <div class="item-description">
-        <div class="field item-name">
-          <h2><%= @item.name %></h2>
-        </div>
-        <div class="field">
-          <%= @item.introduction %>
-        </div>
-        <div class="field item-price">
-        <p>税込価格(税抜価格)  <%= @item.add_tax_price.to_s(:delimited) %>(<%= @item.price %>)円</p>
-
-              <span class="tax">(税込)</span>
-          </h3>
-        </div>
-      </div>
-
+    <div class="offset-1 col-4">
+        <h2 class="font-weight-bold"><%= @item.name %></h2>
+        
+       <p><%= @item.introduction %></p>
+      <h4 class="mt-5 mb-4" ><span class="font-weight-bold"><%= @item.add_tax_price.to_s(:delimited) %></span> <span class="small">円 (税込)</span></h4>
       <div class="field">
         <% if @item.is_active == true %>
             <%= form_for(@cart_item , url: cart_items_path, method: :post) do |f| %>
