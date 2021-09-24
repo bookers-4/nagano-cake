@@ -16,7 +16,7 @@ class Item < ApplicationRecord
 
    def total_price(amount)
     (self.price*amount*1.10).round
-  end
+   end
 
 
 
