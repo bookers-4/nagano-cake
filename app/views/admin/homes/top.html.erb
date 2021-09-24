@@ -1,1 +1,31 @@
-<h1>トップページ</h1>
+<div class="container">
+  <div class="row mt-5">
+    <h2><span style="background-color:#dcdcdc">注文履歴一覧</span></h2>
+      <table class="table">
+      <thead>
+      <!--表の行（水平方向）をグループ化するタグ-->
+        <tr>
+        <!--このタグの間に書かれたものが同じ列となる-->
+          <th>購入日時</th>
+          <th>購入者</th>
+          <th>注文個数</th>
+          <th>注文ステータス</th>
+          <!--書かれた内容は見出しとなり太字で中央揃いとなる-->
+        </tr>
+      </thead>
+      <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= link_to order.created_at.strftime('%Y年%m月%d日%H時%M分%S秒'), admin_order_path(order) %></td>
+          <td><%= order.customer.last_name %><%= order.customer.first_name %></td>
+          <td><%= order.order_details.sum(:amount) %></td>
+          <td><%= order.order_status %></td>
+          <!--書かれた内容は通常の文となり左揃いとなる-->
+          <!--strftimeとは、日時データを指定したフォーマットで文字列に変換することができるメソッド-->
+        </tr>
+      <% end %>
+      </tbody>
+      </table>
+    <%= paginate @orders %>
+  </div>
+</div>
