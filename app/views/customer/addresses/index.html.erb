@@ -1,0 +1,64 @@
+<div class="container my-5">
+  <div class= "row">
+   <div class= "offset-1">
+    <h2 class="red-border px-3 pb-1">
+        配送先一覧/編集</h2>
+   </div>
+  </div>
+
+<div class="row my-3">
+ <div class="offset-2 col-8">
+    <%= form_for(@address) do |f| %>
+     <div class = "form-group">
+      <%= f.label :"郵便番号(ハイフンなし)" %>
+      <%= f.text_field :postal_code, class: "col-6 form-control", placeholder: "郵便番号" %>
+     </div>
+    
+     <div class = "form-group">
+      <%= f.label :"住所" %>
+      <%= f.text_field :address, class: "form-control", placeholder: "住所" %>
+     </div>
+    
+     <div class = "form-group">
+      <%= f.label :"宛名" %>
+      <div class = "form-row">
+       <div class = "col-4">
+        <%= f.text_field :last_name ,class: "form-control", placeholder: "姓" %>
+       </div>
+       <div class = "col-4">
+        <%= f.text_field :first_name ,class: "form-control", placeholder: "名" %>
+       </div>
+      </div>
+     </div>
+     
+      <div class = "row" >
+       <%= f.submit "新規登録", class: 'btn btn-success' %>
+      </div>
+    <% end %>
+ </div>
+</div>
+
+ <div class="row">
+  <table class = "table table-bordered" >
+   <thead>
+    <tr class = "red-border">
+     <th>郵便番号</th>
+     <th style = "width:30%">住所</th>
+     <th>宛名</th>
+     <th></th>
+   </tr>
+   </thead>
+   <tbody>
+    <% @addresses.each do |address| %>
+     <tr class = "brown_border" >
+      <td><%= address.postal_code %></td>
+      <td><%= address.address %></td>
+      <td><%= address.last_name %><%= address.first_name %></td>
+      <td><%= link_to "編集する", edit_address_path(address), class: 'btn btn-success' %></td>
+      <td><%= link_to "削除する", address_path(address), method: :delete, date:{ comfilm:'Are you sure?' }, class: 'btn btn-danger'  %></td>
+     </tr>
+    <% end %>
+   </tbody>
+  </table>
+ </div>
+</div>

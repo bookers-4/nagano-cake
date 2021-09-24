@@ -13,4 +13,12 @@ class Item < ApplicationRecord
   def add_tax_price
     (self.price*1.10).round
   end
-end  
+
+   def total_price(amount)
+    (self.price*amount*1.10).round
+  end
+
+
+
+
+end
