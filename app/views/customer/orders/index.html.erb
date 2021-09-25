@@ -13,7 +13,7 @@
 		<% @orders.each do |order|%>
 		<tr>
 			<td class="col-xs-3"><%= order.created_at.strftime('%Y/%m/%d') %></td>
-			<td class="col-xs-2"><%= order.post_code %>
+			<td class="col-xs-2"><%= order.postal_code %>
 				<%= order.address %>
 				<%= order.name %>
 			</td>
@@ -23,7 +23,7 @@
 			<% end %>
 			</td>
 			<td class="col-xs-2"><%= order.total_payment.to_s(:delimited) %></td>
-			<td class="col-xs-2"><%= order.order_status %></td>
+			<td class="col-xs-2"><%= order.status_i18n %></td>
 			<td><%= link_to "表示する", order_path(order), class: "btn btn-primary" %></td>
 		</tr>
 		<% end %>
