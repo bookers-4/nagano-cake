@@ -17,18 +17,14 @@
  @import 'font-awesome-sprockets';
  @import 'font-awesome';
  
- .main-container {
-  background-image: url(cake.jpg);
-  height: 500px;
-  width: 100%;
-  background-size: cover;
-  background-position: center;
- }
- 
-  .main-container2 {
-  background-image: url(makaron.jpg);
-  height: 800px;
-  width: 100%;
-  background-size: cover;
-  background-position: center;
- }
+  .lead {
+    text-align: center;
+  }
+  
+
+  
+  .cover-heading {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+  }

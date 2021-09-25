@@ -1,6 +1,17 @@
-<div class="row">
-	<div class="col-xs-12">
-		<h3><strong>注文履歴一覧</strong></h3>
+<% if !@orders.present? %>
+
+  <div class="container">
+    <div class="row"><h3 class="mt-5 text-center under ">注文履歴一覧</h3></div>
+    <div class="info d-flex align-items-center justify-content-center" style="height:600px;">
+    	<h1>注文履歴がありません</h1>
+    </div>
+  </div>
+
+<% else %>
+<div class="container">
+    <div class="row"><h3 class="mt-5 text-center under ">注文履歴一覧</h3>
+    </div>
+    <div class="row">
 		<table class="table table-bordered table-condensed">
 		<tr>
 			<th>注文日</th>
@@ -30,3 +41,4 @@
 	</table>
 	</div>
 </div>
+<% end %>
