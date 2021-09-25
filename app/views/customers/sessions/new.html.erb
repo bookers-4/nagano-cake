@@ -1,26 +1,31 @@
+<div class= "container">
  <div class= "row">
-  <div class="col-xs-offset-1 col-xs-11">
-   <h3 class="head-line title_h2 text-center">ログイン</h>
-    <h3 class="head-line title_h2 text-center">会員の方はこちらからログイン</h3>
-
+  <div class="col-offset-2 col-10">
+   <h3 class="head-line title_h2 col-2 my-4">ログイン</h>
+    <h3 class="head-line title_h2 col-6">会員の方はこちらからログイン</h3>
+  </div>
+ </div>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-   <div class="field form-group col-xs-9">
-    <%= f.label :"メールアドレス", class: "col-sm-4 control-label" %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "col-sm-8 form-control-static" %>
+   <div class="field form-group col-12 my-4">
+    <%= f.label :"メールアドレス", class: "col-2 offset-2 control-label" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "col-4 form-control-static" %>
    </div>
-   <div class="field form-group col-xs-9">
-    <%= f.label :"パスワード", class: "col-sm-4 control-label" %>
-    <%= f.password_field :password, autocomplete: "current-password", class: "col-sm-8 form-control-static" %>
+   <div class="field form-group col-12 my-2">
+    <%= f.label :"パスワード", class: "col-2 offset-2 control-label" %>
+    <%= f.password_field :password, autocomplete: "current-password", class: "col-4 form-control-static" %>
    </div>
-   <div class="actions col-xs-9 pull-right">
-    <%= f.submit "ログイン", class: 'btn btn-primary' %>
+   <div class="actions col-6 offset-4">
+    <%= f.submit "ログイン", class: 'col-3 btn btn-primary' %>
    </div>
   <% end %>
-  <div class= "col-xs-9">
-   <h2 class="head-line title_h2 text-center">会員登録がお済みでない方</h2>
-　  <p class="new-link">
+</div>
+
+ <div class = "row">
+  <div class= "col-offset-2 col-10 my-5">
+   <h2 class="head-line title_h2 col-6 offset-2">会員登録がお済みでない方</h2>
+　  <p class="new-link col-6 offset-2">
 　   <%= link_to "こちら", new_customer_registration_path, data:{"turbolinks"=>false}, class: "btn-link" %>から新規登録してください。
 　  </p>
   </div>
-  </div>
  </div>
+</div>
