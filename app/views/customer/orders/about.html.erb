@@ -8,11 +8,8 @@
 		<%= form_with(model:@order, url:orders_new_path, method: :post) do |form| %>
 			<h3>支払方法</h3>
 
-			<!-- form.radio_button :カラム名, :保存される値(enumの番号) -->
-			<span>　　　</span><%= form.radio_button :payment_method, 0, checked: "checked" %>
-	  		<%= form.label :クレジットカード %><br>
-	  		<span>　　　</span><%= form.radio_button :payment_method, 1 %>
-	  		<%= form.label :銀行振込 %>
+			<%= form.collection_radio_buttons :payment_method, Order.payment_methods_i18n, :first, :last %>
+
 
 
 			<h3>お届け先</h3>
