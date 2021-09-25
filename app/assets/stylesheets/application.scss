@@ -30,5 +30,27 @@
   height: 800px;
   width: 100%;
   background-size: cover;
-  background-position: center;
+  background-position: right;
  }
+ 
+ .about {
+  margin-top: 200px;
+  text-align: center;
+  display: inline-block;
+  margin-left: auto;
+    margin-right: auto;
+    width: 8em
+}
+
+ .lead {
+    text-align: center;
+  }
+  
+
+  
+  .cover-heading {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
