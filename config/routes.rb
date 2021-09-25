@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  get 'search/search'
    #管理者ルーティング
 
  devise_for :admins, controllers: {
