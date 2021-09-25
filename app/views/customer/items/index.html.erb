@@ -1,17 +1,25 @@
-<% provide(:title, "商品一覧") %>
-<div class="row">
-	<div class="col-xs-10 col-xs-offset-1">
-		<h2 class="item-headline head-line title_h2 text-center">
-		商品一覧
-		<span>
-			(全<%= @items.total_count %>件中　<%= @items.count %>件)
-		</span>
-		</h2>
-			<div class="clearfix item-box">
-				<% @items.each do |item| %>
-				  <%= render "item_each", item: item %>
-				<% end %>
-			</div>
-			<div class="text-center"><%= paginate @items %></div>
-	</div>
+<div class="container mt-5">
+  <div class="row">
+
+<div class="offset-1 col-9">
+      <div class="row　ml-3">
+      <h2 class="mb-3">商品一覧<span class="small">(全<%= @item.count %>件)</span></h2>
+      </div>
+
+      <div class="row">
+        <% @items.each do |item| %>
+          <div class="col-3">
+            <%= link_to item_path(item.id) do %>
+              <%= attachment_image_tag item, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %>
+            <% end %>
+            <p class="my-2"><%= link_to item.name, item_path(item.id),class:"text-dark" %></p>
+            <p class="text-dark mb-5"><%= item.add_tax_price.to_s(:delimited) %>円</p>
+          </div>
+        <% end %>
+        </div>
+
+        <div class="row justify-content-center">
+        <%= paginate @items %>
+        </div>
+    </div>
 </div>
