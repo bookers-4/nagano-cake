@@ -2,7 +2,7 @@ class Customer::OrdersController < ApplicationController
 
 	before_action :authenticate_customer!
 
-	def about
+	def about #情報入力
 		@order = Order.new
 		@customer = current_customer
 		@addresses = Address.where(customer_id: current_customer.id)
@@ -12,14 +12,27 @@ class Customer::OrdersController < ApplicationController
 		customer = current_customer
 
 		# sessionを使ってデータを一時保存
-		@order = Order.new
-		@order.save
+		@order = Order.new(order_params)
+		@order.customer_id = current_customer.id
+		@order.shopping_cost = 800
+		if @order.save
+		@cart_items = current_customer.cart_items
+		@cart_items	.each do |cart_item|
+		@order_detail = OrderDetail.new
+		@order_detail.price = cart_item.item.add_tax_price
+		@order_detail.order_id = @order.id
+		@order_detail.amount = cart_item.amount
+		@order_detail.item_id = cart_item.item.id
+		@order_detail.save
+		end
 		redirect_to orders_complete_path
+		end
 
 	end
 
 
-	def new
+	def new #情報確認
+
 		@order = Order.new
 		customer = current_customer
 		@cart_items = current_customer.cart_items
@@ -30,12 +43,12 @@ class Customer::OrdersController < ApplicationController
 
 		@payment = sum
 
-		cart_items = current_customer.cart_items
+		#cart_items = current_customer.cart_items
 
 		@order_status = 0
 		@order.customer_id = current_customer.id
 		# ラジオボタンで選択された支払方法のenum番号を渡している
-		@payment_method = params[:order][:payment_method].to_i
+		@payment_method = params[:order][:payment_method]
 
 		# ラジオボタンで選択されたお届け先によって条件分岐
 		@shopping_address = params[:a_method].to_i
@@ -97,29 +110,29 @@ class Customer::OrdersController < ApplicationController
 			order_detail.amount = cart_item.amount
 			order_detail.making_status = 0
 			order_detail.price = cart_item.item.total_price(cart_item.amount)
-			#order_detail.save
+			order_detail.save
 		end
 
 		# 購入後はカート内商品削除
 		cart_items.destroy_all
 	end
 
-	#def index
-		#@orders = current_customer.orders
-	#end
+	def index
+		@orders = current_customer.orders
+	end
 
-	#def show
-		#@order = Order.find(params[:id])
-		#@order_details = @order.order_details
-	#end
+	def show
+		@order = Order.find(params[:id])
+		@order_details = @order.order_details
+	end
 
 	  private
 		def address_params
-		 	params.require(:address).permit(:customer_id, :postal_code, :name, :address)
+		 	params.require(:address).permit(:postal_code, :name, :address)
 		end
 
 	    def order_params
-	       params.require(:order).permit(:customer_id, :total_payment, :payment_method, :ordr_status, :post_code, :address, :name)
+	       params.require(:order).permit(:customer_id, :total_payment, :payment_method, :order_status, :postal_code, :address, :name)
 	    end
 
 
