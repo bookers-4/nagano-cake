@@ -9,7 +9,7 @@ class Customer::OrdersController < ApplicationController
 	end
 
 	def create
-		customer = current_customer
+		@customer = current_customer
 
 		# sessionを使ってデータを一時保存
 		@order = Order.new
@@ -30,7 +30,7 @@ class Customer::OrdersController < ApplicationController
 
 		@payment = sum
 
-		cart_items = current_customer.cart_items
+		@cart_items = current_customer.cart_items
 
 		@order_status = 0
 		@order.customer_id = current_customer.id
