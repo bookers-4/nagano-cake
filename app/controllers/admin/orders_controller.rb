@@ -9,7 +9,14 @@ class Admin::OrdersController < ApplicationController
     def update
         order = Order.find(params[:id])
         order.update(blog_params)
-        redirect_to admin_order_path
+        @order_items = @order.order_items
+        if @order.status == "入金確認"
+          @order_items.each do |order_item|
+            order_item.status = "制作待ち"
+            order_item.save
+          end
+        end
+        redirect_to admins_order_path(@order.id)
     end
 
     private

@@ -17,7 +17,7 @@
                 </tr>
                 <tr>
                     <th>配送先</th>
-                    <td><%= order.address %></td>
+                    <td><%= @order.address %></td>
                 </tr>
                 <tr>
                     <th>支払方法</th>
@@ -35,6 +35,7 @@
             </tbody>
             </table>
         </div>
+
         <div class="row md-5">
         <div class="col-7">
             <table class="table mt-3 table-borderless table-hover rounded-top rounded-bottom table_border_radius admin-order-table">
@@ -47,8 +48,9 @@
                         <th>製作ステータス</th>
                     </tr>
                 </thead>
-                
+
                 <tbody>
+                    <%= @sum = 0 %>
                     <% @order_items.each do |order_item| %>
                     <tr>
                         <td><%= order_item.item.name %></td>
@@ -64,7 +66,8 @@
                             <%= f.submit "更新", class: "btn ml-3 btn-dark btn-sm" %>
                     <% end %>
                         </td>
-                    <% end %>    
+                        <%= @sum += @items_price %>
+                    <% end %>
                     </tr>
                 </tbody>
             </table>
@@ -73,6 +76,7 @@
             <tbody>
                 <tr>
                     <th>商品合計</th>
+                    <td><%= @sum %>円</td>
                 </tr>
                 <tr>
                     <th>送料</th>
@@ -80,6 +84,7 @@
                 </tr>
                 <tr>
                     <td>請求金額合計</td>
+                    <td><%= @sum + 800 %>円</td>
                 </tr>
             </tbody>
         </table>
