@@ -55,7 +55,7 @@
               <td><%= order_detail.amount %></td>
               <td><%= order_detail.price.to_s(:delimited) %></td>
               <td class="align-middle">
-                <%= form_with model: order_detail,url: admin_order_detail_path(@order,order_detail), local:true do |f| %>
+                <%= form_with model: order_detail,url: admin_order_detail_path(order_detail), local:true do |f| %>
                 <div class="input-group row">
                 <div class="ml-auto col-8"><%= f.select :making_status,OrderDetail.making_statuses_i18n.invert,{prompt: false} ,class:"form-control border-dark text-dark" %></div>
                 <div class="mr-auto col-3"><%= f.submit "更新",class:"btn btn-outline-dark" %></div>
