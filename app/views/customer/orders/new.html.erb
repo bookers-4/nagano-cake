@@ -62,7 +62,7 @@
         <tr>
           <th class="info">支払方法</th>
           <td class="text-left">
-            <%= @payment_method %>
+            <%= @order.payment_method_i18n %>
           </td>
         </tr>
         <tr>
@@ -79,7 +79,7 @@
       <%= form.hidden_field :address, :value => @order.address %>
       <%= form.hidden_field :name, :value => @order.name %>
       <%= form.hidden_field :total_payment, :value => @payment %>
-      <%= form.hidden_field :payment_method, :value => @payment_method %>
+      <%= form.hidden_field :payment_method, :value => @order.payment_method %>
       <%= form.submit "購入を確定する", class: 'btn btn-primary col-xs-12'%>
       <% end %>
     </div>
