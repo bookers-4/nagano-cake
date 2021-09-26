@@ -48,10 +48,10 @@ class Customer::OrdersController < ApplicationController
 		@order_status = 0
 		@order.customer_id = current_customer.id
 		# ラジオボタンで選択された支払方法のenum番号を渡している
-		@payment_method = params[:order][:payment_method]
+		@order.payment_method = params[:order][:payment_method]
 
 		# ラジオボタンで選択されたお届け先によって条件分岐
-		@shopping_address = params[:a_method].to_i
+		@shopping_address = params[:order][:a_method].to_i
 
 		# ご自身の住所が選択された時
 		if @shopping_address == 0
@@ -63,17 +63,17 @@ class Customer::OrdersController < ApplicationController
 		# 登録済住所が選択された時
 		elsif @shopping_address == 1
 
-			@address = Address.find(params[:address_order])
-			@post_code = address.postal_code
+			@address = Address.find(params[:order][:address_for_order])
+			@order.postal_code = address.postal_code
 			@order.address = address.address
 			@address.name = address.name
 
 		# 新しいお届け先が選択された時
 		elsif @shopping_address == 2
 
-			@post_code = params[:post_code]
-			@address = params[:address]
-			@name= params[:name]
+			@order.postal_code = params[:order][:postal_code]
+			@order.address = params[:order][:address]
+			@order.name= params[:order][:name]
 
 		end
 
@@ -132,7 +132,7 @@ class Customer::OrdersController < ApplicationController
 		end
 
 	    def order_params
-	       params.require(:order).permit(:customer_id, :total_payment, :payment_method, :order_status, :postal_code, :address, :name)
+	       params.require(:order).permit(:customer_id, :total_payment, :payment_method, :order_status, :postal_code, :address, :name, :a_methed)
 	    end
 
 
