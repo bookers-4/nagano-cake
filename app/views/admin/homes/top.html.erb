@@ -19,7 +19,7 @@
           <td><%= link_to order.created_at.strftime('%Y年%m月%d日%H時%M分%S秒'), admin_order_path(order) %></td>
           <td><%= order.customer.last_name %><%= order.customer.first_name %></td>
           <td><%= order.order_details.sum(:amount) %></td>
-          <td><%= order.order_status %></td>
+          <td><%= order.status_i18n %></td>
           <!--書かれた内容は通常の文となり左揃いとなる-->
           <!--strftimeとは、日時データを指定したフォーマットで文字列に変換することができるメソッド-->
         </tr>

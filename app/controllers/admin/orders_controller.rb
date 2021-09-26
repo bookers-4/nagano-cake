@@ -1,28 +1,31 @@
 class Admin::OrdersController < ApplicationController
+   before_action :authenticate_admin!
 
-    def show
-        @order = Order.find(params[:id])
-        # ユーザのデータを1件取得し、インスタンス変数へ渡す。
-        @order_items = OrderDetail.where(order_id: params[:id])
+   def show
+    @order=Order.find(params[:id])
+    @order_details=OrderDetail.find_by(order_id: @order.id)
+   end
+
+  def update
+    order=Order.find(params[:id])
+    order_details=OrderDetail.where(order_id: order.id)
+    order.update(order_params)
+    if params[:order][:status] == "payment_confirmation"
+       order_details.each do |order_detail|
+         order_detail.update(making_status: 1)
+       end
     end
+    redirect_to request.referer
+  end
 
-    def update
-        order = Order.find(params[:id])
-        order.update(blog_params)
-        @order_items = @order.order_items
-        if @order.status == "入金確認"
-          @order_items.each do |order_item|
-            order_item.status = "制作待ち"
-            order_item.save
-          end
-        end
-        redirect_to admins_order_path(@order.id)
-    end
+  private
 
-    private
+  def order_params
+    params.require(:order).permit(:status)
+  end
 
-    def order_params
-        params.require(:order).permit(:order_status)
-    end
+  def order_detail_params
+    params.require(:order_detail).permit(:making_status)
+  end
 
 end

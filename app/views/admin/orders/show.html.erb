@@ -1,4 +1,5 @@
 <div class="container">
+
     <div class="row">
         <div class="admin-heading col-md-12">
             <h2><span style="background-color:#dcdcdc">注文履歴詳細</span></h2>
@@ -34,61 +35,78 @@
                 </tr>
             </tbody>
             </table>
+
         </div>
 
-        <div class="row md-5">
-        <div class="col-7">
-            <table class="table mt-3 table-borderless table-hover rounded-top rounded-bottom table_border_radius admin-order-table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>商品名</th>
-                        <th>単価（税抜）</th>
-                        <th>数量</th>
-                        <th>小計</th>
-                        <th>製作ステータス</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <%= @sum = 0 %>
-                    <% @order_items.each do |order_item| %>
-                    <tr>
-                        <td><%= order_item.item.name %></td>
-                        <td><%= order_item.item.add_tax_price %></td>
-                        <td><%= order_item.amount %></td>
-                        <td>
-                            <%= @item_price = order_item.item.add_tax_price * order_item.amount %>
-                            <%= @items_price %>
-                        </td>
-                        <td>
-                            <%= form_with model: order_item, url: admins_order_item_path(@order, order_item), local: true do |f| %>
-                            <%= f.select :status, {["着手不可", "着手不可"], ["製作待ち", "製作待ち"], ["製作中", "製作中"], ["製作完了", "製作完了"]} class: "form_control" %>
-                            <%= f.submit "更新", class: "btn ml-3 btn-dark btn-sm" %>
-                    <% end %>
-                        </td>
-                        <%= @sum += @items_price %>
-                    <% end %>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="col-2 mb-3 font-weight-bold">注文ステータス</div>
+        <div class="col-6 input-group">
+          <%= form_with model: @order,url:admin_order_path(@order) ,local:true do |f| %>
+          <div class="row">
+          <div class="col-8"><%= f.select :status,Order.statuses_i18n.invert,{prompt: false},class:"form-control border-dark text-dark" %></div>
+          <div class="col-3"><%= f.submit "更新" ,class:" btn btn-outline-dark" %></div>
+          </div>
+          <% end %>
         </div>
-        <table class="table table-borderless">
-            <tbody>
-                <tr>
-                    <th>商品合計</th>
-                    <td><%= @sum %>円</td>
-                </tr>
-                <tr>
-                    <th>送料</th>
-                    <td>800円</td>
-                </tr>
-                <tr>
-                    <td>請求金額合計</td>
-                    <td><%= @sum + 800 %>円</td>
-                </tr>
-            </tbody>
+      </div>
+
+      <div class="row mt-5">
+        <div class="col-8">
+        <table class="table">
+          <thead>
+            <tr class="table-active">
+              <th>商品名</th>
+              <th>単価(税込)</th>
+              <th>数量</th>
+              <th>小計</th>
+              <th>製作ステータス</th>
+              <th></th>
+            </tr>
+          </thead>
+          <% sum = 0 %>
+          <% @order.order_details.each do |order_detail| %>
+          <tbody>
+            <tr>
+              <td><%= order_detail.item.name %></td>
+              <td><%= order_detail.item.add_tax_price.to_s(:delimited) %></td>
+              <td><%= order_detail.amount %></td>
+              <td><%= order_detail.price.to_s(:delimited) %></td>
+              <td class="align-middle">
+                <%= form_with model: order_detail,url: admin_order_detail_path(order_detail), local:true do |f| %>
+                <div class="input-group row">
+                <div class="ml-auto col-8"><%= f.select :making_status,OrderDetail.making_statuses_i18n.invert,{prompt: false} ,class:"form-control border-dark text-dark" %></div>
+                <div class="mr-auto col-3"><%= f.submit "更新",class:"btn btn-outline-dark" %></div>
+                </div>
+                <% end %>
+              </td>
+            </tr>
+          </tbody>
+          <% sum += order_detail.price %>
+          <% end %>
         </table>
-
         </div>
+
+        <div class="offset-1 col-3 d-flex align-items-end">
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <td class="font-weight-bold">商品合計</td>
+                <!--合計金額表示されるか確認する-->
+                <td class="text-right"><%= sum.to_s(:delimited) %>円</td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">送料</td>
+                <td class="text-right"><%= @order.shopping_cost.to_s(:delimited) %>円</td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">請求金額合計</td>
+                <td class="font-weight-bold text-right"><%= @order.total_payment.to_s(:delimited) %>円</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
     </div>
+</div>
 </div>

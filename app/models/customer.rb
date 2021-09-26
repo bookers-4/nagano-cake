@@ -26,13 +26,11 @@ end
 
 
 
-  # is_valid==falseの場合、ログインさせない
+  
 
-  #def active_for_authentication?
-    #super && (is_deleted?)
-  #end
-
-
+  def active_for_authentication?
+    super && (self.is_deleted == false)
+  end
+  
 end
-
 

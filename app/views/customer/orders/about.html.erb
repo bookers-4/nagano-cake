@@ -30,7 +30,9 @@
 			<span>　　　</span><%= form.radio_button :a_method, 1 %>
 			<%= form.label :登録済住所から選択 %><br>
 			<!-- collection_select(プロパティ名, オブジェクトの配列, value属性の項目, テキストの項目 [, オプション])-->
+
 			<span>　　　　　</span><%= form.collection_select :address_for_order, @addresses, :id, :address_all %><br>
+
 
 			<span>　　　</span><%= form.radio_button :a_method, 2 %>
 			<%= form.label :新しいお届け先 %><br>
