@@ -3,6 +3,7 @@ class Customer::SearchController < ApplicationController
   def search
     @value = params["search"]["value"]
     @how = params["search"]["how"]
+    
     @datas = search_for(@how,@value)
   end
   
@@ -10,7 +11,7 @@ class Customer::SearchController < ApplicationController
 
   def match(value)
     #.orを使用することで、valueに一致するカラムのデータをnameカラムとgenre_idカラムから探してきます。
-    Item.where(name: value)
+    Item.where(genre_id: params["search"]["value"])
   end
 
   def forward(value)                              #forward以降は商品名検索の定義しかしてません。

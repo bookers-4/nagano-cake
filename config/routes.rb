@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 
-  get 'search/search'
+
    #管理者ルーティング
 
  devise_for :admins, controllers: {
@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     scope module: :customer do
     root to: 'homes#top'
     get 'about' => 'homes#about'
-
+    get 'search/search'
     resources :items,only: [:index,:show]
 
 
