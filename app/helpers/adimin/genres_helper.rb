@@ -1,2 +1,0 @@
-module Adimin::GenresHelper
-end
