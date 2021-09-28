@@ -1,41 +1,25 @@
 <div class="container">
+  <div class="row">
+    <div class="col">
+      <h3 class="my-5 under">注文履歴詳細</span></h3>
 
-    <div class="row">
-        <div class="admin-heading col-md-12">
-            <h2><span style="background-color:#dcdcdc">注文履歴詳細</span></h2>
-            <table class="table">
-            <tbody>
-                <tr>
-                    <th>購入者</th>
-                    <td>
-                      <%= @order.customer.last_name %>
-                      <%= @order.customer.first_name %>
-                    </td>
-                </tr>
-                <tr>
-                    <th>注文日</th>
-                    <td><%= @order.created_at.strftime("%Y%m%d %H:%M")%></td>
-                </tr>
-                <tr>
-                    <th>配送先</th>
-                    <td><%= @order.address %></td>
-                </tr>
-                <tr>
-                    <th>支払方法</th>
-                    <td><%= @order.payment_method %></td>
-                </tr>
-                <tr>
-                    <th>注文ステータス</th>
-                    <td>
-                        <%= form_with model: @order, url:admins_order_path(@order), local: true do |f| %>
-                        <%= f.select :status,}, class: "form-control" %><%= form.collection_radio_buttons :payment_method, Order.payment_methods_i18n, :first, :last %>
-                        <%= f.submit "更新", class: "btn ml-3 btn-dark btn-sm" %>
-                    <% end %>
-                    </td>
-                </tr>
-            </tbody>
-            </table>
+      <div class="row">
+        <div class="col-2 mb-3 font-weight-bold">購入者</div>
+        <div class="col-10"><span class="under"><%= @order.customer.full_name %></span></div>
 
+        <div class="col-2 mb-3 font-weight-bold">注文日</div>
+        <div class="col-10"><%= @order.created_at.strftime("%Y/%m/%d") %></div>
+
+        <div class="col-2 mb-3 font-weight-bold">配送先</div>
+        <div class="col-10">〒<%= @order.postal_code %> <%= @order.address %><br><%= @order.name %></div>
+
+        <div class="col-2 my-3 font-weight-bold">支払い方法</div>
+        <div class="col-10 mt-3">
+          <% if  @order.payment_method = 0 %>
+            クレジットカード
+          <% else %>
+            銀行払い
+          <% end %>
         </div>
 
         <div class="col-2 mb-3 font-weight-bold">注文ステータス</div>
